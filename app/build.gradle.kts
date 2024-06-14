@@ -29,6 +29,11 @@ dependencies {
 
     // For JSON parsing
     implementation("com.google.code.gson:gson:2.8.8")
+
+    testImplementation("org.mockito:mockito-core:4.3.1")
+
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
