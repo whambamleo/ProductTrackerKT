@@ -26,6 +26,9 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+
+    // For JSON parsing
+    implementation("com.google.code.gson:gson:2.8.8")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
