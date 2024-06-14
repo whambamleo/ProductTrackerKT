@@ -25,6 +25,6 @@ class Product(override val apiUrl: String, override val parseStrategy: ParseStra
             isAvailable = true
         }
 
-        return stockCount > 0
+        return isAvailable
     }
 }

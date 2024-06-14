@@ -1,24 +1,21 @@
 package com.whambamleo
 
+import com.whambamleo.resources.getCoachURL
 import com.whambamleo.templates.Product
 import com.whambamleo.utilities.getParseStrategy
+import com.whambamleo.resources.*
 
 class App {
     // TODO: Make this class Singleton
 
     fun init() {
+        val CM079 = Product(getCoachURL("CM079-SVDTV"), getParseStrategy("COACH"))
+        CM079.setHeaders(getCoachHeaders("CM079-SVDTV"))
+        println(CM079.getLatestAvailability())
 
-        val abirBirthdayGift = Product("https://www.coachoutlet.com/api/inventory?vgId=CM079-SVDTV&includeVariantData=false&__v__=2-an5x47jiKXbuP_tBs3V" ,
-                                        getParseStrategy("COACH"))
-        abirBirthdayGift.setHeaders(mapOf(
-            "authority" to "www.coachoutlet.com",
-            "method" to "GET",
-            "path" to "/api/inventory?vgId=CM079-SVDTV&includeVariantData=false&__v__=2-an5x47jiKXbuP_tBs3V",
-            "scheme" to "https",
-            "accept" to "*/*",
-            "accept-language" to "en-US,en;q=0.9"
-        ))
-        println(abirBirthdayGift.getLatestAvailability())
+        val CA548 = Product(getCoachURL("CA548-IMRFF"), getParseStrategy("COACH"))
+        CA548.setHeaders(getCoachHeaders("CA548-IMRFF"))
+        println(CA548.getLatestAvailability())
     }
 }
 

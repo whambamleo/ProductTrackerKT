@@ -16,6 +16,7 @@ fun getParseStrategy(type: String): ParseStrategy {
 
 val CoachStrategy: ParseStrategy = {
     println("Using Coach strategy")
+    println(((it["inventory"] as Map<*, *>)["inventoryInfo"] as Map<*, *>))
     ((it["inventory"] as Map<*, *>)["inventoryInfo"] as Map<*, *>) ["stockLevel"] as Double
 }
 
