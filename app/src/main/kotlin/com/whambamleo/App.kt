@@ -4,6 +4,7 @@ import com.whambamleo.resources.getCoachURL
 import com.whambamleo.templates.Product
 import com.whambamleo.utilities.getParseStrategy
 import com.whambamleo.resources.*
+import com.whambamleo.utilities.listTopicsPag
 
 class App {
     // TODO: Make this class Singleton
@@ -19,6 +20,7 @@ class App {
     }
 }
 
-fun main() {
-    App().init()
+suspend fun main() {
+//    App().init()
+    listTopicsPag()
 }

@@ -34,6 +34,8 @@ dependencies {
 
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 
+    implementation("aws.sdk.kotlin:sns:1.0.0")
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
