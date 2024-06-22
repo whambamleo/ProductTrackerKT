@@ -6,7 +6,7 @@ import com.whambamleo.models.ProductModel
 import com.whambamleo.utilities.ParseStrategy
 import com.whambamleo.utilities.makeGETRequest
 
-class Product(override val apiUrl: String, override val parseStrategy: ParseStrategy) : ProductModel {
+class Product(override val apiUrl: String, override val parseStrategy: ParseStrategy, override val snsTopicARN: String) : ProductModel {
     private var headers: Map<String, String> = mutableMapOf()
     fun setHeaders(inputHeaders: Map<String, String>) {
         headers = inputHeaders
@@ -27,4 +27,6 @@ class Product(override val apiUrl: String, override val parseStrategy: ParseStra
 
         return isAvailable
     }
+
+
 }
