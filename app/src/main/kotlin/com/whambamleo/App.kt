@@ -4,34 +4,45 @@ import com.whambamleo.resources.getCoachURL
 import com.whambamleo.templates.Product
 import com.whambamleo.utilities.getParseStrategy
 import com.whambamleo.resources.*
-import com.whambamleo.utilities.listTopicsPag
 import com.whambamleo.utilities.publishMessage
+import kotlinx.coroutines.*
+import java.util.concurrent.TimeUnit
+
+suspend fun main() {
+    App().init()
+}
 
 class App {
-    // TODO: Make this class Singleton
-
-    fun init() {
+    suspend fun init() {
         // TODO: automate creation of topic
-//        val CM079 = Product(getCoachURL("CM079-SVDTV"),
-//                    getParseStrategy("COACH"),
-//        "arn:aws:sns:us-east-1:272026318753:CoachCM079")
-//        CM079.setHeaders(getCoachHeaders("CM079-SVDTV"))
-//        println(CM079.getLatestAvailability())
+        val CM079 = Product("CM079",
+                            getCoachURL("CM079-SVDTV"),
+                            getParseStrategy("COACH"),
+                "arn:aws:sns:us-east-1:272026318753:CoachCM079")
+        CM079.setHeaders(getCoachHeaders("CM079-SVDTV"))
 
-//        val CA548 = Product(getCoachURL("CA548-IMRFF"), getParseStrategy("COACH"))
-//        CA548.setHeaders(getCoachHeaders("CA548-IMRFF"))
-//        println(CA548.getLatestAvailability())
+        val CA548 = Product("CA548",
+            getCoachURL("CA548-IMRFF"),
+            getParseStrategy("COACH"),
+            "arn:aws:sns:us-east-1:272026318753:CA548")
+        CA548.setHeaders(getCoachHeaders("CA548-IMRFF"))
+
+        val products: List<Product> = listOf(CM079, CA548)
+
+        while (true) {
+            for (product in products) {
+                if (product.isAvailable()) {
+                    publishMessage(product.snsTopicARN,
+                          "${product.name} is available!",
+                           "ALERT: Product restocked!")
+                }
+            }
+            runBlocking {
+                println("Checks performed. Sleeping for one hour.")
+                delay(TimeUnit.HOURS.toMillis(1)) // Delay for 1 hour
+            }
+        }
     }
 }
 
-suspend fun main() {
-//    App().init()
-    listTopicsPag()
 
-    val CM079 = Product(getCoachURL("CM079-SVDTV"),
-                        getParseStrategy("COACH"),
-                        "arn:aws:sns:us-east-1:272026318753:CoachCM079")
-    CM079.setHeaders(getCoachHeaders("CM079-SVDTV"))
-    println(CM079.getLatestAvailability())
-    publishMessage("arn:aws:sns:us-east-1:272026318753:CoachCM079","test message", "test subject")
-}
