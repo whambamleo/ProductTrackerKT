@@ -21,13 +21,7 @@ class App {
                 "arn:aws:sns:us-east-1:272026318753:CoachCM079")
         CM079.setHeaders(getCoachHeaders("CM079-SVDTV"))
 
-        val CA548 = Product("CA548",
-            getCoachURL("CA548-IMRFF"),
-            getParseStrategy("COACH"),
-            "arn:aws:sns:us-east-1:272026318753:CA548")
-        CA548.setHeaders(getCoachHeaders("CA548-IMRFF"))
-
-        val products: List<Product> = listOf(CM079, CA548)
+        val products: List<Product> = listOf(CM079)
 
         while (true) {
             for (product in products) {
